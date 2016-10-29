@@ -52,41 +52,6 @@ if($join=="join"){
 if($type != "text"){
 	exit;
 }
-if($type=="join"){
-  $response_format_text = [
-    "type" => "template",
-    "altText" => "こちらの〇〇はいかがですか？",
-    "template" => [
-      "type" => "buttons",
-      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
-      "title" => "○○レストラン",
-      "text" => "お探しのレストランはこれですね",
-      "actions" => [
-          [
-            "type" => "postback",
-            "label" => "予約する",
-            "data" => "action=buy&itemid=123"
-          ],
-          [
-            "type" => "postback",
-            "label" => "電話する".$text."",
-            "data" => "action=pcall&itemid=123"
-          ],
-          [
-            "type" => "uri",
-            "label" => "詳しく見る",
-            "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
-          ],
-          [
-            "type" => "message",
-            "label" => "違うやつ",
-            "text" => "違うやつお願い"
-          ]
-      ]
-    ]
-  ];
-}
-
 //返信データ作成
 if ($text == 'はい') {
   $response_format_text = [
@@ -105,7 +70,7 @@ if ($text == 'はい') {
           ],
           [
             "type" => "postback",
-            "label" => "電話する".$type."",
+            "label" => "電話する".$join."",
             "data" => "action=pcall&itemid=123"
           ],
           [
