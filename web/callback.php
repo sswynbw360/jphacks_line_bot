@@ -1,31 +1,20 @@
 <?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
-
-$input = file_get_contents('php://input');
-$json = json_decode($input);
-$event = $json->events[0];
-
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('Channel Access Token');
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'Channel Secret']);
 
 
 //ユーザーからのメッセージ取得
-//$json_string = file_get_contents('php://input');
-//$jsonObj = json_decode($json_string);
+$json_string = file_get_contents('php://input');
+$jsonObj = json_decode($json_string);
 
-//$type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
+$type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
-//$replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-//$join =$jsonObj->{"event"}->
+$replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
+$join =$jsonObj->{"events"}[0]->type;
 
 //メッセージ以外のときは何も返さず終了
-
-if("join" == $event -> type){
+if($join=="join"){
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -42,7 +31,7 @@ if("join" == $event -> type){
           ],
           [
             "type" => "postback",
-            "label" => "どうするよ〜〜〜〜",
+            "label" => "電話する".$text."",
             "data" => "action=pcall&itemid=123"
           ],
           [
@@ -59,9 +48,45 @@ if("join" == $event -> type){
     ]
   ];
 }
-if("text"=! $event->message->type){
-  exit;
+
+if($type != "text"){
+	exit;
 }
+if($type=="join"){
+  $response_format_text = [
+    "type" => "template",
+    "altText" => "こちらの〇〇はいかがですか？",
+    "template" => [
+      "type" => "buttons",
+      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
+      "title" => "○○レストラン",
+      "text" => "お探しのレストランはこれですね",
+      "actions" => [
+          [
+            "type" => "postback",
+            "label" => "予約する",
+            "data" => "action=buy&itemid=123"
+          ],
+          [
+            "type" => "postback",
+            "label" => "電話する".$text."",
+            "data" => "action=pcall&itemid=123"
+          ],
+          [
+            "type" => "uri",
+            "label" => "詳しく見る",
+            "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
+          ],
+          [
+            "type" => "message",
+            "label" => "違うやつ",
+            "text" => "違うやつお願い"
+          ]
+      ]
+    ]
+  ];
+}
+
 //返信データ作成
 if ($text == 'はい') {
   $response_format_text = [
