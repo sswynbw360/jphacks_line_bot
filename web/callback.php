@@ -11,10 +11,9 @@ $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-$join =$jsonObj->{"events"}[1]->type;
 
 //メッセージ以外のときは何も返さず終了
-if($join=="join"){
+if("join"==$jsonObj->{"events"}[0]->type){
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -70,7 +69,7 @@ if ($text == 'はい') {
           ],
           [
             "type" => "postback",
-            "label" => "電話する".$join."",
+            "label" => "電話する",
             "data" => "action=pcall&itemid=123"
           ],
           [
