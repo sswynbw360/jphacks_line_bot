@@ -186,7 +186,7 @@ if($text == '@join'){
 }
 */
 
-if("join"==$join){
+if("@join"==$text){
   $post_data = [
   "to" => $userid,
   "messages" => [$response_format_text]
