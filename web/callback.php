@@ -26,7 +26,7 @@ if ($text == '@人狼') {
     "altText" => "ようこそ人狼へ",
     "template" => [
         "type" => "buttons",
-        "text" => "こんにちわ 何かご用ですか？",
+        "text" => "ようこそ人狼へ",
         "actions" => [
             [
               "type" => "message",
@@ -46,6 +46,9 @@ if ($text == '@人狼') {
         ]
     ]
   ];
+}
+if($text == '@join'){
+  "".$userid."";
 }
 
 /*if ($text == 'はい') {
