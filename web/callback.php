@@ -4,7 +4,6 @@ require_once　__DIR__ .'../vendor/autoload.php';
 
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 
-
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
@@ -51,7 +50,9 @@ if ($text == '@人狼') {
   ];
 }
 if($text == '@join'){
-  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('OvxAonnSUuCByCAiQ4wG0Q+zY7wTwTgvgxxe52foKRdDf5W8umsFwn1P6yMYXYzthRRzaeqdrpot7ZlQGLc8oOcDEtGOQcAvDMBGCb7p414ugd3O96abmreqgIuks4tPrzY7nSq8z+zxJZsjY4M0BQdB04t89/1O/w1cDnyilFU=');
+
+  /*
+  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
   $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '28624147ebfe7c7c27c3103e475c9403']);
   $response = $bot->getProfile($userid);
   if ($response->isSucceeded()) {
@@ -61,8 +62,13 @@ if($text == '@join'){
     echo $profile['statusMessage'];
     $response_format_text=
     ["type" => "text",
-     "text" => $profile['displayName']];
-  }
+     "text" => [$profile['displayName']]
+    ];
+  }*/
+  $response_format_text=
+    ["type" => "text",
+     "text" => [$profile['displayName']]
+    ];
 }
 /*if ($text == 'はい') {
   $response_format_text = [
