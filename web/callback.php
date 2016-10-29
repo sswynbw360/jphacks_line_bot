@@ -16,45 +16,38 @@ $join = $jsonObj->{"events"}[0]->type;
 $userid = $jsonObj->{"events"}[0]->{"sourse"}->{"userid"};
 
 //メッセージ以外のときは何も返さず終了
-if("join"==$join){
-  $response_format_text = [
-    "type" => "template",
-    "altText" => "こちらの〇〇はいかがですか？",
-    "template" => [
-      "type" => "buttons",
-      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
-      "title" => "○○レストラン",
-      "text" => "お探しのレストランはこれですね",
-      "actions" => [
-          [
-            "type" => "postback",
-            "label" => "予約する",
-            "data" => "action=buy&itemid=123"
-          ],
-          [
-            "type" => "postback",
-            "label" => "電話する".$text."",
-            "data" => "action=pcall&itemid=123"
-          ],
-          [
-            "type" => "uri",
-            "label" => "詳しく見る",
-            "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
-          ],
-          [
-            "type" => "message",
-            "label" => "違うやつ",
-            "text" => "違うやつお願い"
-          ]
-      ]
-    ]
-  ];
-}
-
 if($type != "text"){
 	exit;
 }
 //返信データ作成
+if ($text == '@人狼') {
+  $response_format_text = [
+    "type" => "template",
+    "altText" => "こんにちわ 何かご用ですか？（はい／いいえ）",
+    "template" => [
+        "type" => "confirm",
+        "text" => "こんにちわ 何かご用ですか？",
+        "actions" => [
+            [
+              "type" => "message",
+              "label" => "@help",
+              "text" => "@help"
+            ],
+            [
+              "type" => "message",
+              "label" => "@join",
+              "text" => "@join"
+            ]
+            [
+              "type" => "message",
+              "label" => "@start",
+              "text" => "@start"
+            ]
+        ]
+    ]
+  ];
+}
+
 if ($text == 'はい') {
   $response_format_text = [
     "type" => "template",
