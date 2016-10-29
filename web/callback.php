@@ -82,7 +82,7 @@ if ($text == 'はい') {
           ],
           [
             "type" => "postback",
-            "label" => "".$join."",
+            "label" => "電話する",
             "data" => "action=pcall&itemid=123"
           ],
           [
@@ -203,6 +203,7 @@ $post_data = [
 	"replyToken" => $replyToken,
 	"messages" => [$response_format_text]
 	];
+
 $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
@@ -213,4 +214,5 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Authorization: Bearer ' . $accessToken
     ));
 $result = curl_exec($ch);
+
 curl_close($ch);
