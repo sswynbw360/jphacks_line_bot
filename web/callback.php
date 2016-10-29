@@ -51,9 +51,9 @@ if ($text == '@人狼') {
   ];
 }
 if($text == '@join'){
-  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
-  $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
-  $response = $bot->getProfile('<userId>');
+  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('OvxAonnSUuCByCAiQ4wG0Q+zY7wTwTgvgxxe52foKRdDf5W8umsFwn1P6yMYXYzthRRzaeqdrpot7ZlQGLc8oOcDEtGOQcAvDMBGCb7p414ugd3O96abmreqgIuks4tPrzY7nSq8z+zxJZsjY4M0BQdB04t89/1O/w1cDnyilFU=');
+  $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '28624147ebfe7c7c27c3103e475c9403']);
+  $response = $bot->getProfile($userid);
   if ($response->isSucceeded()) {
     $profile = $response->getJSONDecodedBody();
     echo $profile['displayName'];
