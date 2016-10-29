@@ -59,6 +59,9 @@ if($text == '@join'){
     echo $profile['displayName'];
     echo $profile['pictureUrl'];
     echo $profile['statusMessage'];
+    $response_format_text=
+    ["type" => "text",
+     "text" => $profile['displayName']];
   }
 }
 /*if ($text == 'はい') {
