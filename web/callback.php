@@ -25,7 +25,7 @@ if ($text == '@人狼') {
     "type" => "template",
     "altText" => "こんにちわ 何かご用ですか？（はい／いいえ）",
     "template" => [
-        "type" => "confirm",
+        "type" => "buttons",
         "text" => "こんにちわ 何かご用ですか？",
         "actions" => [
             [
