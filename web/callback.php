@@ -18,7 +18,6 @@ if($type != "text"){
 	exit;
 }
 
-
 //返信データ作成
 if ($text == 'はい') {
   $response_format_text = [
@@ -37,7 +36,7 @@ if ($text == 'はい') {
           ],
           [
             "type" => "postback",
-            "label" => "電話する",
+            "label" => "電話する".$join."",
             "data" => "action=pcall&itemid=123"
           ],
           [
