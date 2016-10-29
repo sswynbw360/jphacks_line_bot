@@ -69,8 +69,8 @@ if($text == '@join'){
     ["type" => "text",
      "text" => [$profile['displayName']]
     ];
-}
-/*if ($text == 'はい') {
+/*}
+  if ($text == 'はい') {
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -203,9 +203,9 @@ if($text == '@join'){
     ]
   ];
 }
-*/
 
-if("@join"==$text){
+
+if("@join"==$text){*/
   $post_data = [
   "to" => $userid,
   "messages" => [$response_format_text]
