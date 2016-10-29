@@ -6,7 +6,6 @@ $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
 
-
 $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
@@ -40,8 +39,13 @@ if ($text == 'はい') {
             "data" => "action=pcall&itemid=123"
           ],
           [
+            "type" => "uri",
+            "label" => "詳しく見る",
+            "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
+          ],
+          [
             "type" => "message",
-            "label" => "違くないやつ",
+            "label" => "違うやつ",
             "text" => "違うやつお願い"
           ]
       ]
@@ -125,19 +129,13 @@ if ($text == 'はい') {
       ]
     ]
   ];
-} else if ($text == '1d100') {
-	$random = rand(1,100);
-	$response_format_text = [
-		"type" => "text",
-		"text" => $random
-	];
 } else {
   $response_format_text = [
     "type" => "template",
     "altText" => "こんにちわ 何かご用ですか？（はい／いいえ）",
     "template" => [
         "type" => "confirm",
-        "text" => "こんにちわ 何かご用ですか？ ご用ですよね？",
+        "text" => "こんにちわ 何かご用ですか？",
         "actions" => [
             [
               "type" => "message",
