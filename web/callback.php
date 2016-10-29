@@ -20,10 +20,10 @@ if($type != "text"){
 	exit;
 }
 //返信データ作成
-if ($text == 'a') {
+if ($text == '@a') {
   $response_format_text = [
     "type" => "template",
-    "altText" => "こんにちわ 何かご用ですか？（はい／いいえ）",
+    "altText" => "ようこそ人狼へ",
     "template" => [
         "type" => "buttons",
         "text" => "こんにちわ 何かご用ですか？",
