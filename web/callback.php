@@ -1,5 +1,12 @@
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
+
+$input = file_get_contents('php://input');
+$json = json_decode($input);
+$event = $json->events[0];
 
 
 //ユーザーからのメッセージ取得
@@ -11,12 +18,13 @@ $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
+$join =$jsonObj->{"event"}->
 
 //メッセージ以外のときは何も返さず終了
 if($type != "text"){
 	exit;
 }
-if($type=="join"){
+if($event->type=="join"){
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -33,7 +41,7 @@ if($type=="join"){
           ],
           [
             "type" => "postback",
-            "label" => "電話する".$text."",
+            "label" => "どうするよ〜〜〜〜",
             "data" => "action=pcall&itemid=123"
           ],
           [
