@@ -20,7 +20,7 @@ if($type != "text"){
 	exit;
 }
 //返信データ作成
-if ($text == '@a') {
+if ($text == '@人狼') {
   $response_format_text = [
     "type" => "template",
     "altText" => "ようこそ人狼へ",
