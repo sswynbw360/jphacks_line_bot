@@ -11,9 +11,10 @@ $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
+$join == $jsonObj->{"events"}[0]->type;
 
 //メッセージ以外のときは何も返さず終了
-if("join"==$jsonObj->{"events"}[0]->type){
+if("join"==$join){
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -191,7 +192,13 @@ $post_data = [
 	"messages" => [$response_format_text]
 	];
 
-$ch = curl_init("https://api.line.me/v2/bot/message/reply");
+if("join"==$join){
+  $ch = curl_init("https://api.line.me/v2/bot/message/push");
+}
+else{
+  $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+}
+
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
