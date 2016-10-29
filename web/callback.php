@@ -6,6 +6,8 @@ $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
 
+$join = $jsonObj->{"events"}[0]->{"type"}
+
 $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
@@ -16,7 +18,7 @@ $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 if($type != "text"){
 	exit;
 }
-if($type == "join"){
+if($join == "join"){
   $response_format_text = [
     "type" => "template",
     "altText" => "目次",
