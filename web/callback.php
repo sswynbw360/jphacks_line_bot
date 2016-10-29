@@ -69,7 +69,7 @@ if ($text == 'はい') {
           ],
           [
             "type" => "postback",
-            "label" => "電話する".$text."",
+            "label" => "電話する".$type."",
             "data" => "action=pcall&itemid=123"
           ],
           [
