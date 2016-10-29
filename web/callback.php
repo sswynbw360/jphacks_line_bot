@@ -49,26 +49,7 @@ if ($text == '@人狼') {
     ]
   ];
 }
-if($text == '@join'){
 
-  /*
-  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
-  $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '28624147ebfe7c7c27c3103e475c9403']);
-  $response = $bot->getProfile($userid);
-  if ($response->isSucceeded()) {
-    $profile = $response->getJSONDecodedBody();
-    echo $profile['displayName'];
-    echo $profile['pictureUrl'];
-    echo $profile['statusMessage'];
-    $response_format_text=
-    ["type" => "text",
-     "text" => [$profile['displayName']]
-    ];
-  }*/
-  $response_format_text=
-    ["type" => "text",
-     "text" => [$profile['displayName']]
-    ];
 /*}
   if ($text == 'はい') {
   $response_format_text = [
@@ -202,10 +183,26 @@ if($text == '@join'){
         ]
     ]
   ];
-}
+}*/
 
 
-if("@join"==$text){*/
+if($text == '@join'){
+
+  /*
+  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
+  $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '28624147ebfe7c7c27c3103e475c9403']);
+  $response = $bot->getProfile($userid);
+  if ($response->isSucceeded()) {
+    $profile = $response->getJSONDecodedBody();
+    echo $profile['displayName'];
+    echo $profile['pictureUrl'];
+    echo $profile['statusMessage'];
+  }*/
+    
+  $response_format_text=
+    ["type" => "text",
+     "text" => [$profile['displayName']]
+    ];
   $post_data = [
   "to" => $userid,
   "messages" => [$response_format_text]
@@ -217,7 +214,7 @@ else{
   "replyToken" => $replyToken,
   "messages" => [$response_format_text]
   ];
-  $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+  $ch = curl_init("https://api.line.me/v2/bot/message/push");
 }
 
 curl_setopt($ch, CURLOPT_POST, true);
