@@ -82,7 +82,7 @@ if ($text == 'はい') {
           ],
           [
             "type" => "postback",
-            "label" => "電話する",
+            "label" => $join,
             "data" => "action=pcall&itemid=123"
           ],
           [
