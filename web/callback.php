@@ -8,22 +8,23 @@ $input = file_get_contents('php://input');
 $json = json_decode($input);
 $event = $json->events[0];
 
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('Channel Access Token');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'Channel Secret']);
+
 
 //ユーザーからのメッセージ取得
-$json_string = file_get_contents('php://input');
-$jsonObj = json_decode($json_string);
+//$json_string = file_get_contents('php://input');
+//$jsonObj = json_decode($json_string);
 
-$type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
+//$type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
-$replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-$join =$jsonObj->{"event"}->
+//$replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
+//$join =$jsonObj->{"event"}->
 
 //メッセージ以外のときは何も返さず終了
-if($type != "text"){
-	exit;
-}
+
 if("join" == $event -> type){
   $response_format_text = [
     "type" => "template",
@@ -58,7 +59,9 @@ if("join" == $event -> type){
     ]
   ];
 }
-
+if("text"=! $event->message->type){
+  exit;
+}
 //返信データ作成
 if ($text == 'はい') {
   $response_format_text = [
