@@ -24,7 +24,7 @@ $join =$jsonObj->{"event"}->
 if($type != "text"){
 	exit;
 }
-if($event->type=="join"){
+if("join" == $event -> type){
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
