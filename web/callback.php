@@ -11,7 +11,9 @@ $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-$join == $jsonObj->{"events"}[0]->type;
+$join = $jsonObj->{"events"}[0]->type;
+
+$userid = $jsonObj->{"events"}[0]->{"sourse"}->{"userid"};
 
 //メッセージ以外のときは何も返さず終了
 if("join"==$join){
@@ -187,15 +189,19 @@ if ($text == 'はい') {
   ];
 }
 
-$post_data = [
-	"replyToken" => $replyToken,
-	"messages" => [$response_format_text]
-	];
 
 if("join"==$join){
+  $post_data = [
+  "to" => $userid,
+  "messages" => [$response_format_text]
+  ];
   $ch = curl_init("https://api.line.me/v2/bot/message/push");
 }
 else{
+  $post_data = [
+  "replyToken" => $replyToken,
+  "messages" => [$response_format_text]
+  ];
   $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 }
 
