@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 
 
@@ -48,7 +51,15 @@ if ($text == '@人狼') {
   ];
 }
 if($text == '@join'){
-  "".$userid."";
+  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
+  $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
+  $response = $bot->getProfile('<userId>');
+  if ($response->isSucceeded()) {
+    $profile = $response->getJSONDecodedBody();
+    echo $profile['displayName'];
+    echo $profile['pictureUrl'];
+    echo $profile['statusMessage'];
+  }
 }
 
 /*if ($text == 'はい') {
