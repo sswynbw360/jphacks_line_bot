@@ -37,7 +37,7 @@ if ($text == '@人狼') {
               "type" => "message",
               "label" => "@join",
               "text" => "@join"
-            ]
+            ],
             [
               "type" => "message",
               "label" => "@start",
