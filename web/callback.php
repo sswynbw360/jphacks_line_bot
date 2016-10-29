@@ -16,6 +16,35 @@ $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 if($type != "text"){
 	exit;
 }
+if($type == "join"){
+  $response_format_text = [
+    "type" => "template",
+    "altText" => "目次",
+    "template" => [
+      "type" => "text",
+      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
+      "title" => "目次",
+      "text" => "以下のコマンドを入力してください。",
+      "actions" => [
+          [
+            "type" => "message",
+            "text" => "@join",
+            "text" => "ゲームに参加します。"
+          ],
+          [
+            "type" => "message",
+            "text" => "@help",
+            "text" => "人狼のルール説明を行います。"
+          ],
+          [
+            "type" => "message",
+            "text" => "@start",
+            "text" => "ゲームを開始します。"
+          ]
+      ]
+    ]
+  ];
+}
 
 //返信データ作成
 if ($text == 'はい') {
