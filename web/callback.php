@@ -11,7 +11,7 @@ $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-$join =$jsonObj->{"events"}[0]->type;
+$join =$jsonObj->{"events"}[1]->type;
 
 //メッセージ以外のときは何も返さず終了
 if($join=="join"){
