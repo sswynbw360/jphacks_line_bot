@@ -6,8 +6,6 @@ $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
 
-$join = $jsonObj->{"events"}[0]->{"type"}
-
 $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
@@ -17,35 +15,6 @@ $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 //メッセージ以外のときは何も返さず終了
 if($type != "text"){
 	exit;
-}
-if($join == "join"){
-  $response_format_text = [
-    "type" => "template",
-    "altText" => "目次",
-    "template" => [
-      "type" => "text",
-      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
-      "title" => "目次",
-      "text" => "以下のコマンドを入力してください。",
-      "actions" => [
-          [
-            "type" => "message",
-            "text" => "@join",
-            "text" => "ゲームに参加します。"
-          ],
-          [
-            "type" => "message",
-            "text" => "@help",
-            "text" => "人狼のルール説明を行います。"
-          ],
-          [
-            "type" => "message",
-            "text" => "@start",
-            "text" => "ゲームを開始します。"
-          ]
-      ]
-    ]
-  ];
 }
 
 //返信データ作成
