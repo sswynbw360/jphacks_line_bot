@@ -20,7 +20,7 @@ if($type != "text"){
 	exit;
 }
 //返信データ作成
-if ($text == '@人狼') {
+if ($text == 'a') {
   $response_format_text = [
     "type" => "template",
     "altText" => "こんにちわ 何かご用ですか？（はい／いいえ）",
@@ -48,7 +48,7 @@ if ($text == '@人狼') {
   ];
 }
 
-if ($text == 'はい') {
+/*if ($text == 'はい') {
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -181,7 +181,7 @@ if ($text == 'はい') {
     ]
   ];
 }
-
+*/
 
 if("join"==$join){
   $post_data = [
