@@ -50,7 +50,7 @@ if ($text == '@人狼') {
     ]
   ];
 }
-/*if($text == '@join'){
+if($text == '@join'){
   $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
   $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
   $response = $bot->getProfile('<userId>');
@@ -61,7 +61,6 @@ if ($text == '@人狼') {
     echo $profile['statusMessage'];
   }
 }
-*/
 /*if ($text == 'はい') {
   $response_format_text = [
     "type" => "template",
