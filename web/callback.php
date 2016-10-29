@@ -1,5 +1,5 @@
 <?php
-
+require_once　'/vendor/autoload.php';
 
 
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
