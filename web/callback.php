@@ -51,44 +51,40 @@ if ($text == '@人狼') {
 }
 
 
-  $response_format_text=
-    ["type" => "text",
-     "text" => "join"]
-    ];
-    //SQLのインサート文を書く
-  $post_data = [
-    "to" => $userid,
+  if($text == '@join'){
+    $response_format_text=
+      ["userid" => $userid,
+      "text" => [$profile['displayName']]
+      ];
+      //SQLのインサート文を書く
+    $post_data = [
+    "replyToken" => $userid,
     "messages" => [$response_format_text]
-  ];
+    ];
     $ch = curl_init("https://api.line.me/v2/bot/message/push");
+    function cul_setopt();
+  }
+
+  else{
+    $post_data = [
+    "replyToken" => $replyToken,
+    "messages" => [$response_format_text]
+    ];
+    $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+    $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+    function cul_setopt();
+  }
+  function cul_setopt(){
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-      'Content-Type: application/json; charser=UTF-8',
-      'Authorization: Bearer ' . $accessToken
-      ));
+        'Content-Type: application/json; charser=UTF-8',
+        'Authorization: Bearer ' . $accessToken
+        ));
     $result = curl_exec($ch);
 
-curl_close($ch);
-
-else{
-  $post_data = [
-"replyToken" => $replyToken,
-"messages" => [$response_format_text]
-];
-$ch = curl_init("https://api.line.me/v2/bot/message/reply");
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-      'Content-Type: application/json; charser=UTF-8',
-      'Authorization: Bearer ' . $accessToken
-      ));
-    $result = curl_exec($ch);
-
-curl_close($ch);
-}
+    curl_close($ch);
+  }
 ?>
