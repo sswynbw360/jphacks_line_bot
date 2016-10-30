@@ -71,10 +71,9 @@ if ($text == '@人狼') {
     "messages" => [$response_format_text]
     ];
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");
-    $ch = curl_init("https://api.line.me/v2/bot/message/reply");
-    function cul_setopt();
+    function cul_setopt($ch);
   }
-  function cul_setopt(){
+  function cul_setopt(POST $ch){
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
