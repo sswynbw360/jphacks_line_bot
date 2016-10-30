@@ -50,11 +50,17 @@ if ($text == '@人狼') {
   ];
 }
 
-$post_data = [
-"replyToken" => $replyToken,
-"messages" => [$response_format_text]
-];
-$ch = curl_init("https://api.line.me/v2/bot/message/reply");
+
+  $response_format_text=
+    ["type" => "text",
+     "text" => "join"]
+    ];
+    //SQLのインサート文を書く
+  $post_data = [
+    "to" => $userid,
+    "messages" => [$response_format_text]
+  ];
+    $ch = curl_init("https://api.line.me/v2/bot/message/push");
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -67,17 +73,12 @@ $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 
 curl_close($ch);
 
-if($text == '@join'){
-  $response_format_text=
-    ["type" => "text",
-     "text" => "join"]
-    ];
-    //SQLのインサート文を書く
+else{
   $post_data = [
-    "to" => $userid,
-    "messages" => [$response_format_text]
-  ];
-    $ch = curl_init("https://api.line.me/v2/bot/message/push");
+"replyToken" => $replyToken,
+"messages" => [$response_format_text]
+];
+$ch = curl_init("https://api.line.me/v2/bot/message/reply");
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
