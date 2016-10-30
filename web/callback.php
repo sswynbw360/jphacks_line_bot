@@ -50,181 +50,44 @@ if ($text == '@人狼') {
   ];
 }
 
-/*}
-  if ($text == 'はい') {
-  $response_format_text = [
-    "type" => "template",
-    "altText" => "こちらの〇〇はいかがですか？",
-    "template" => [
-      "type" => "buttons",
-      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
-      "title" => "○○レストラン",
-      "text" => "お探しのレストランはこれですね",
-      "actions" => [
-          [
-            "type" => "postback",
-            "label" => "予約する",
-            "data" => "action=buy&itemid=123"
-          ],
-          [
-            "type" => "postback",
-            "label" => "電話する",
-            "data" => "action=pcall&itemid=123"
-          ],
-          [
-            "type" => "uri",
-            "label" => "詳しく見る",
-            "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
-          ],
-          [
-            "type" => "message",
-            "label" => "違うやつ",
-            "text" => "違うやつお願い"
-          ]
-      ]
-    ]
-  ];
-} else if ($text == 'いいえ') {
-  exit;
-} else if ($text == '違うやつお願い') {
-  $response_format_text = [
-    "type" => "template",
-    "altText" => "候補を３つご案内しています。",
-    "template" => [
-      "type" => "carousel",
-      "columns" => [
-          [
-            "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img2-1.jpg",
-            "title" => "●●レストラン",
-            "text" => "こちらにしますか？",
-            "actions" => [
-              [
-                  "type" => "postback",
-                  "label" => "予約する",
-                  "data" => "action=rsv&itemid=111"
-              ],
-              [
-                  "type" => "postback",
-                  "label" => "電話する",
-                  "data" => "action=pcall&itemid=111"
-              ],
-              [
-                  "type" => "uri",
-                  "label" => "詳しく見る（ブラウザ起動）",
-                  "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
-              ]
-            ]
-          ],
-          [
-            "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img2-2.jpg",
-            "title" => "▲▲レストラン",
-            "text" => "それともこちら？（２つ目）",
-            "actions" => [
-              [
-                  "type" => "postback",
-                  "label" => "予約する",
-                  "data" => "action=rsv&itemid=222"
-              ],
-              [
-                  "type" => "postback",
-                  "label" => "電話する",
-                  "data" => "action=pcall&itemid=222"
-              ],
-              [
-                  "type" => "uri",
-                  "label" => "詳しく見る（ブラウザ起動）",
-                  "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
-              ]
-            ]
-          ],
-          [
-            "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img2-3.jpg",
-            "title" => "■■レストラン",
-            "text" => "はたまたこちら？（３つ目）",
-            "actions" => [
-              [
-                  "type" => "postback",
-                  "label" => "予約する",
-                  "data" => "action=rsv&itemid=333"
-              ],
-              [
-                  "type" => "postback",
-                  "label" => "電話する",
-                  "data" => "action=pcall&itemid=333"
-              ],
-              [
-                  "type" => "uri",
-                  "label" => "詳しく見る（ブラウザ起動）",
-                  "uri" => "https://" . $_SERVER['SERVER_NAME'] . "/"
-              ]
-            ]
-          ]
-      ]
-    ]
-  ];
-} else {
-  $response_format_text = [
-    "type" => "template",
-    "altText" => "こんにちわ 何かご用ですか？（はい／いいえ）",
-    "template" => [
-        "type" => "confirm",
-        "text" => "こんにちわ 何かご用ですか？",
-        "actions" => [
-            [
-              "type" => "message",
-              "label" => "はい",
-              "text" => "はい"
-            ],
-            [
-              "type" => "message",
-              "label" => "いいえ",
-              "text" => "いいえ"
-            ]
-        ]
-    ]
-  ];
-}*/
-
-
-if($text == '@join'){
-
-  /*
-  $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
-  $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '28624147ebfe7c7c27c3103e475c9403']);
-  $response = $bot->getProfile($userid);
-  if ($response->isSucceeded()) {
-    $profile = $response->getJSONDecodedBody();
-    echo $profile['displayName'];
-    echo $profile['pictureUrl'];
-    echo $profile['statusMessage'];
-  }*/
-    
-  $response_format_text=
-    ["type" => "text",
-     "text" => [$profile['displayName']]
-    ];
-  $post_data = [
-  "to" => $userid,
-  "messages" => [$response_format_text]
-  ];
-  $ch = curl_init("https://api.line.me/v2/bot/message/reply");
-}
-else{
-  $post_data = [
-  "replyToken" => $replyToken,
-  "messages" => [$response_format_text]
-  ];
-  $ch = curl_init("https://api.line.me/v2/bot/message/reply");
-}
-
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json; charser=UTF-8',
-    'Authorization: Bearer ' . $accessToken
-    ));
-$result = curl_exec($ch);
+$post_data = [
+"replyToken" => $replyToken,
+"messages" => [$response_format_text]
+];
+$ch = curl_init("https://api.line.me/v2/bot/message/reply");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      'Content-Type: application/json; charser=UTF-8',
+      'Authorization: Bearer ' . $accessToken
+      ));
+    $result = curl_exec($ch);
 
 curl_close($ch);
+
+if($text == '@join'){
+  $response_format_text=
+    ["type" => "text",
+     "text" => "join"]
+    ];
+    //SQLのインサート文を書く
+  $post_data = [
+    "to" => $userid,
+    "messages" => [$response_format_text]
+  ];
+    $ch = curl_init("https://api.line.me/v2/bot/message/push");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      'Content-Type: application/json; charser=UTF-8',
+      'Authorization: Bearer ' . $accessToken
+      ));
+    $result = curl_exec($ch);
+
+curl_close($ch);
+}
+
