@@ -90,4 +90,4 @@ if($text == '@join'){
 
 curl_close($ch);
 }
-
+?>
