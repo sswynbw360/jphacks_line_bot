@@ -58,11 +58,11 @@ if ($text == '@人狼') {
       ];
       //SQLのインサート文を書く
     $post_data = [
-    "replyToken" => $userid,
+    "to" => $userid,
     "messages" => [$response_format_text]
     ];
     $ch = curl_init("https://api.line.me/v2/bot/message/push");
-    function cul_setopt();
+    function cul_setopt($ch);
   }
 
   else{
