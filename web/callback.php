@@ -16,6 +16,7 @@ $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 $join = $jsonObj->{"events"}[0]->type;
 
 $userid = $jsonObj->{"events"}[0]->{"sourse"}->{"userid"};
+$ch="";
 
 //メッセージ以外のときは何も返さず終了
 if($type != "text"){
@@ -62,7 +63,7 @@ if ($text == '@人狼') {
     "messages" => [$response_format_text]
     ];
     $ch = curl_init("https://api.line.me/v2/bot/message/push");
-    cul_setopt($ch);
+    cul_setopt();
   }
 
   else{
@@ -71,9 +72,9 @@ if ($text == '@人狼') {
     "messages" => [$response_format_text]
     ];
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");
-    cul_setopt($ch);
+    cul_setopt();
   }
-  function cul_setopt(POST $ch){
+  function cul_setopt(){
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
