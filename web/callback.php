@@ -18,7 +18,7 @@ if("message"==$event->type){
   if(("@bye"==$event->message->text) && (("group"==$event->source->type) ||("room"==$event->source->type))){
 
   }else if("@join"==$event->message->text){
-    $response = $bot->getProfile($event->source->userId);
+    $response = $httpClient->getProfile($event->source->userId);
       if ($response->isSucceeded()) {
         $profile = $response->getJSONDecodedBody();
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['displayName'] . "はゲームに参加したよ！");
