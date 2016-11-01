@@ -1,27 +1,42 @@
 <?php
-require_once　__DIR__ .'../vendor/autoload.php';
+require('../vendor/autoload.php');
 
 
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
-$jsonObj = json_decode($json_string);
+$json = json_decode($json_string);
+$event = $json->events[0];
 
-$type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
-//メッセージ取得
-$text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
+$type = $json->{"events"}[0]->{"message"}->{"type"};
 //ReplyToken取得
-$replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-$join = $jsonObj->{"events"}[0]->type;
+$replyToken = $json->{"events"}[0]->{"replyToken"};
+if("message"==$event->type){
+  if(("@bye"==$event->message->text) && (("group"==$event->source->type) ||("room"==$event->source->type))){
 
-$userid = $jsonObj->{"events"}[0]->{"sourse"}->{"userid"};
-$ch="";
-
-//メッセージ以外のときは何も返さず終了
-if($type != "text"){
-	exit;
+  }else if("@join"==$event->message->text){
+    $response = $accessToken->getProfile($event->sourse->userId);
+    if($response->isSucceeded()){
+      $profile = $response->getJSONDecodedBody();
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['displayName'] . "はゲームに参加したよ！");
+        $response2 = $accessToken->replyMessage($replyToken, $textMessageBuilder);
+    }
+  }
 }
+else if("follow"==$event->type){
+
+}
+else if("join"==$event->type){
+  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\textMessageBuilder("やあ！");
+}
+else if("beacon"==$event->type){
+
+}
+else{
+
+}
+/*
 //返信データ作成
 if ($text == '@人狼') {
   $response_format_text = [
@@ -88,4 +103,5 @@ if ($text == '@人狼') {
 
     curl_close($ch);
   }
+  */
 ?>
