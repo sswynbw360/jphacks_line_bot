@@ -8,9 +8,7 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('zhvKsOOA3F09IbOkr26va
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '77d574f6714aa59abe2a2e5db99b5edb']);
 //イベントタイプ判別
 if ("message" == $event->type) {            //一般的なメッセージ(文字・イメージ・音声・位置情報・スタンプ含む)
-    if ("@bye" == $event->message->text && ("group" == $event->source->type || "room" == $event->source->type)) {
-    
-    } else if ("@join" == $event->message->text) {
+    if ("@join" == $event->message->text) {
       $response = $bot->getProfile($event->source->userId);
       if ($response->isSucceeded()) {
         $profile = $response->getJSONDecodedBody();
