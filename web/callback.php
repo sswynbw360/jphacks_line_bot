@@ -18,11 +18,11 @@ if("message"==$event->type){
   if(("@bye"==$event->message->text) && (("group"==$event->source->type) ||("room"==$event->source->type))){
 
   }else if("@join"==$event->message->text){
-    $response = $bot->getProfile($event->sourse->userId);
-    if($response->isSucceeded()){
-      $profile = $response->getJSONDecodedBody();
+    $response = $bot->getProfile($event->source->userId);
+      if ($response->isSucceeded()) {
+        $profile = $response->getJSONDecodedBody();
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['displayName'] . "はゲームに参加したよ！");
-        $response2 = $httpClient->replyMessage($bot, $textMessageBuilder);
+        $response2 = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     }
   }
 }
