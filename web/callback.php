@@ -2,25 +2,27 @@
 require('../vendor/autoload.php');
 
 
-$accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
+//$accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
 $json = json_decode($json_string);
 $event = $json->events[0];
-
-$type = $json->{"events"}[0]->{"message"}->{"type"};
 //ReplyToken取得
-$replyToken = $json->{"events"}[0]->{"replyToken"};
+//$replyToken = $json->{"events"}[0]->{"replyToken"};
+
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('zhvKsOOA3F09IbOkr26vawp7coqjKVcdOCGUmdKW1KvJ/gIpz/B8vq/JdhFrwwTi5EdpwgFYWbyPWKka/EfsRlWVoga3FtoC5peDFf5lU6Xax5cX18znSX9s+d47IPb1y/bPFMfFnmMD1Db6v1RU+wdB04t89/1O/w1cDnyilFU=');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '77d574f6714aa59abe2a2e5db99b5edb']);
+
 if("message"==$event->type){
   if(("@bye"==$event->message->text) && (("group"==$event->source->type) ||("room"==$event->source->type))){
 
   }else if("@join"==$event->message->text){
-    $response = $accessToken->getProfile($event->sourse->userId);
+    $response = $bot->getProfile($event->sourse->userId);
     if($response->isSucceeded()){
       $profile = $response->getJSONDecodedBody();
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['displayName'] . "はゲームに参加したよ！");
-        $response2 = $accessToken->replyMessage($replyToken, $textMessageBuilder);
+        $response2 = $httpClient->replyMessage($bot, $textMessageBuilder);
     }
   }
 }
