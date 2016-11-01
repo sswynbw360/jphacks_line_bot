@@ -30,7 +30,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
         $response2 = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     }
       
-    } else if ("text" == $event->message->type) {
+    } /*else if ("text" == $event->message->type) {
         //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event->message->text);
         
         if("group" == $event->source->type) {
@@ -94,7 +94,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
           ]
         ])
         $response = $bot->pushMessage('C56e234e2a4de4a584436e5b303f774ac', $textMessageBuilder);
-      }
+      }*/
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
