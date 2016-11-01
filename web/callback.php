@@ -111,4 +111,3 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
 syslog(LOG_EMERG, print_r($event->replyToken, true));
 syslog(LOG_EMERG, print_r($response, true));
 return;
-?>
